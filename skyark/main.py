@@ -6,7 +6,6 @@ from config import *
 from web3 import Web3
 from loguru import logger
 
-
 def load_abi(name):
     try:
         path = f"{os.path.dirname(os.path.abspath(__file__))}/abis/"
@@ -59,10 +58,12 @@ if __name__ == "__main__":
                     (2, 'Dispatch_Squad')
                 ]
                 random.shuffle(tasks)
-                for i in range(0, iter_number):
-                    task_number, task_name = tasks[i]
-                    task(private_key, task_number, task_name)
-                    time.sleep(random.randint(15, 30))
+                task_numbers = len(tasks)
+                for e in range(0, iter_number):
+                    for i in range(0, task_numbers):
+                        task_number, task_name = tasks[i]
+                        task(private_key, task_number, task_name)
+                        time.sleep(random.randint(15, 30))
                 logger.info(f'Сегодняшние задания успешно выполнены!')
                 working_days -= 1
                 time.sleep(60*60*24)  # ждем сутки
