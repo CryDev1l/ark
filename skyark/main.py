@@ -6,6 +6,7 @@ from config import *
 from web3 import Web3
 from loguru import logger
 
+
 def load_abi(name):
     try:
         path = f"{os.path.dirname(os.path.abspath(__file__))}/abis/"
@@ -52,14 +53,15 @@ if __name__ == "__main__":
                 account = web3.eth.account.privateKeyToAccount(private_key)
                 address_wallet = account.address
                 logger.info(f'Выполняю задание для {address_wallet}:')
+                tasks = [
+                    (1, 'Exploration'),
+                    (1, 'Dispatch_Squad'),
+                    (2, 'Dispatch_Squad')
+                ]
+                random.shuffle(tasks)
                 for i in range(0, iter_number):
-                    task_name = 'Exploration'
-                    task(private_key, 1, task_name)
-                    time.sleep(random.randint(15, 30))
-                    task_name = 'Dispatch_Squad'
-                    task(private_key, 1, task_name)
-                    time.sleep(random.randint(15, 30))
-                    task(private_key, 2, task_name)
+                    task_number, task_name = tasks[i]
+                    task(private_key, task_number, task_name)
                     time.sleep(random.randint(15, 30))
                 logger.info(f'Сегодняшние задания успешно выполнены!')
                 working_days -= 1
