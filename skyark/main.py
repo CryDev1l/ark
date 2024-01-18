@@ -64,9 +64,9 @@ if __name__ == "__main__":
                         task_number, task_name = tasks[i]
                         task(private_key, task_number, task_name)
                         time.sleep(random.randint(15, 30))
-                logger.info(f'Сегодняшние задания успешно выполнены!')
-                working_days -= 1
-                time.sleep(60*60*24)  # ждем сутки
+            logger.info(f'Сегодняшние задания успешно выполнены!')
+            working_days -= 1
+            time.sleep(60*60*24)  # ждем сутки
         logger.info(f'Все задания успешно выполнены!')
     except Exception as e:
         logger.error(e)
